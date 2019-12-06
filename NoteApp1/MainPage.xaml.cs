@@ -37,38 +37,74 @@ namespace NoteApp1
                     };
                 };
                 frame.Content = label;
-                frame.GestureRecognizers.Add(c);
-                //myStackLayout.Children.Add(label);
-                var t = new SwipeGestureRecognizer();
-                if (Left.Height > Right.Height)
+                frame.GestureRecognizers.Add(c);               
+                var pan = new PanGestureRecognizer();
+
+                double totalX = 0.0;
+                if (Right.Height < Left.Height)
                 {
-                    t.Direction = SwipeDirection.Right;
-                    t.Swiped += async (swipeSender, swipeEventArg) =>
+                    pan.PanUpdated += async (panSender, panArgs) =>
                     {
-                        if (await DisplayAlert("Confirm the deleting", "Are you sure?", "Yes!", "No"))
+                        switch (panArgs.StatusType)
                         {
-                            Right.Children.Remove(frame);
+                            case GestureStatus.Canceled:
+                            case GestureStatus.Started:
+                                frame.TranslationX = 0;
+                                break;
+                            case GestureStatus.Running:
+                                if (panArgs.TotalX > 0)
+                                {
+                                    frame.TranslationX = panArgs.TotalX;
+                                    totalX = panArgs.TotalX;
+                                }
+                                break;
+                            case GestureStatus.Completed:
+                                if (totalX > 60)
+                                {
+                                    if (await DisplayAlert("Confirm the deleting", "Are you sure?", "Yes!", "No"))
+                                    {
+                                        Right.Children.Remove(panSender as Frame);
+                                    }
+                                    totalX = 0;
+                                }
+                                frame.TranslationX = 0;
+                                break;
                         }
                     };
-                    frame.GestureRecognizers.Add(t);
+                    frame.GestureRecognizers.Add(pan);
                     Right.Children.Add(frame);
-
-                    string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                    string fileName = Path.Combine(path, counter.ToString() + ".txt");
-
-                    File.WriteAllText(fileName, label.Text);
                 }
                 else
                 {
-                    t.Direction = SwipeDirection.Left;
-                    t.Swiped += async (swipeSender, swipeEventArg) =>
+                    pan.PanUpdated += async (panSender, panArgs) =>
                     {
-                        if (await DisplayAlert("Confirm the deleting", "Are you sure?", "Yes!", "No"))
+                        switch (panArgs.StatusType)
                         {
-                            Left.Children.Remove(frame);
+                            case GestureStatus.Canceled:
+                            case GestureStatus.Started:
+                                frame.TranslationX = 0;
+                                break;
+                            case GestureStatus.Running:
+                                if (panArgs.TotalX < 0)
+                                {
+                                    frame.TranslationX = panArgs.TotalX;
+                                    totalX = panArgs.TotalX;
+                                }
+                                break;
+                            case GestureStatus.Completed:
+                                if (totalX < -60)
+                                {
+                                    if (await DisplayAlert("Confirm the deleting", "Are you sure?", "Yes!", "No"))
+                                    {
+                                        Left.Children.Remove(panSender as Frame);
+                                    }
+                                    totalX = 0;
+                                }
+                                frame.TranslationX = 0;
+                                break;
                         }
                     };
-                    frame.GestureRecognizers.Add(t);
+                    frame.GestureRecognizers.Add(pan);
                     Left.Children.Add(frame);
                 }
             };
