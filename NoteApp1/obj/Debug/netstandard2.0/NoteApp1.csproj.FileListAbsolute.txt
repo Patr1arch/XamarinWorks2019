@@ -1,0 +1,14 @@
+C:\Users\patri\source\repos\NoteApp1\NoteApp1\obj\Debug\netstandard2.0\NoteApp1.csprojAssemblyReference.cache
+C:\Users\patri\source\repos\NoteApp1\NoteApp1\bin\Debug\netstandard2.0\NoteApp1.deps.json
+C:\Users\patri\source\repos\NoteApp1\NoteApp1\bin\Debug\netstandard2.0\NoteApp1.dll
+C:\Users\patri\source\repos\NoteApp1\NoteApp1\bin\Debug\netstandard2.0\NoteApp1.pdb
+C:\Users\patri\source\repos\NoteApp1\NoteApp1\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\patri\source\repos\NoteApp1\NoteApp1\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+C:\Users\patri\source\repos\NoteApp1\NoteApp1\obj\Debug\netstandard2.0\NoteApp1.csproj.CoreCompileInputs.cache
+C:\Users\patri\source\repos\NoteApp1\NoteApp1\obj\Debug\netstandard2.0\NoteApp1.AssemblyInfoInputs.cache
+C:\Users\patri\source\repos\NoteApp1\NoteApp1\obj\Debug\netstandard2.0\NoteApp1.AssemblyInfo.cs
+C:\Users\patri\source\repos\NoteApp1\NoteApp1\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\patri\source\repos\NoteApp1\NoteApp1\obj\Debug\netstandard2.0\NoteApp1.dll
+C:\Users\patri\source\repos\NoteApp1\NoteApp1\obj\Debug\netstandard2.0\NoteApp1.pdb
+C:\Users\patri\source\repos\NoteApp1\NoteApp1\obj\Debug\netstandard2.0\Page1.xaml.g.cs
+C:\Users\patri\source\repos\NoteApp1\NoteApp1\obj\Debug\netstandard2.0\Page2.xaml.g.cs

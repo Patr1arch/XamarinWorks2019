@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:NoteApp1"
+             x:Class="NoteApp1.MainPage"
+             Title="Make new note">
+
+    <Grid Padding="10">
+        <!-- Place new controls here -->
+        <!--<Label Text="Welcome to Xamarin.Forms!" 
+           HorizontalOptions="Center"
+           VerticalOptions="CenterAndExpand" />-->
+        <Grid x:Name="NotesGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="0" x:Name="Left" VerticalOptions="Start"></StackLayout>
+            <StackLayout Grid.Column="1" x:Name="Right" VerticalOptions="Start"></StackLayout>
+        </Grid>
+        <!--<StackLayout x:Name="myStackLayout"></StackLayout>-->
+        <Button Text ="+" WidthRequest="40" HeightRequest="40" VerticalOptions="End" HorizontalOptions="End"
+                Clicked="Button_Clicked"> </Button>
+
+    </Grid>
+
+</ContentPage>
