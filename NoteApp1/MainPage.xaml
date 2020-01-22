@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:NoteApp1"
              x:Class="NoteApp1.MainPage"
-             Title="Make new note">
+             Title="Your notes">
 
     <Grid Padding="10">
         <!-- Place new controls here -->

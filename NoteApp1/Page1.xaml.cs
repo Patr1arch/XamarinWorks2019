@@ -13,12 +13,13 @@ namespace NoteApp1
 	public partial class Page1 : ContentPage
 	{
         public string pageText = null;
-        public string fullText = null;
+        public bool isCancelled = true;
 
 		public Page1 ()
 		{
 			InitializeComponent ();
             pageText = null;
+            isCancelled = true;
             
         }
 
@@ -33,6 +34,7 @@ namespace NoteApp1
         {
             //fullText = Editor.Text;
             pageText = Editor.Text;
+            isCancelled = false;
             Navigation.PopAsync();
 
         }

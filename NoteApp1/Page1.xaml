@@ -2,14 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NoteApp1.Page1"
-             Title="Abacaba">
+             Title="Nake new note">
     
     <ContentPage.Content>
         <Grid>
             <!--<Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />-->
-            <Editor x:Name="Editor" BackgroundColor="Blue" Placeholder="Input a text:" ></Editor>
+            <Editor x:Name="Editor" Placeholder="Input a text:" ></Editor>
             <Button Clicked="Button_Clicked" HorizontalOptions="End" VerticalOptions="End" WidthRequest="40" HeightRequest="40"></Button>
         </Grid>
     </ContentPage.Content>
