@@ -20,7 +20,7 @@ namespace NoteApp1
             while (File.Exists(filePath))
             {
                 string content = File.ReadAllText(filePath);
-                CreateFrame(content, true);
+                CreateFrame(content.Split(Convert.ToChar(1))[0], content.Split(Convert.ToChar(1))[1], true);
                 newName = (++leftCounter).ToString() + "Left.txt";
                 filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), newName);
             }
@@ -30,31 +30,43 @@ namespace NoteApp1
             while (File.Exists(filePath))
             {
                 string content = File.ReadAllText(filePath);
-                CreateFrame(content, false);
+                CreateFrame(content.Split(Convert.ToChar(1))[0], content.Split(Convert.ToChar(1))[1], false);
                 newName = (++rightCounter).ToString() + "Right.txt";
                 filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), newName);
             }
         }
 
-        private void CreateFrame(string text, bool isLeft)
+        private void CreateFrame(string text, string dateText, bool isLeft)
         {
             Frame frame = new Frame();
             Label label = new Label();
-            label.Text = text;
-            label.LineBreakMode = LineBreakMode.TailTruncation;
+
             frame.HeightRequest = 75;
             frame.BorderColor = Color.Gray;
+
+            label.Text = text;
+            label.LineBreakMode = LineBreakMode.TailTruncation;
+            Label dateLabel = new Label();
+            dateLabel.Text = dateText;
+            dateLabel.FontSize = 12;
+            dateLabel.VerticalOptions = LayoutOptions.EndAndExpand;
+
+            StackLayout stack = new StackLayout();
+            stack.Children.Add(label);
+            stack.Children.Add(dateLabel);
+
             var c = new TapGestureRecognizer();
             c.Tapped += (tapSender, tapEventArg) =>
             {
-                Page1 anotherPage1 = new Page1(label.Text);
+                Page1 anotherPage1 = new Page1(label.Text, dateText);
                 anotherPage1.Disappearing += (object anotherA, EventArgs anotherB) =>
                 {
                     label.Text = anotherPage1.pageText;
+                    dateLabel.Text = anotherPage1.lastEdit;
                 };
                 Navigation.PushAsync(anotherPage1);
             };
-            frame.Content = label;
+            frame.Content = stack;
             frame.GestureRecognizers.Add(c);
 
             var pan = new PanGestureRecognizer();
@@ -175,21 +187,31 @@ namespace NoteApp1
                 if (newPage1.isCancelled || String.IsNullOrEmpty(newPage1.pageText)) return;
                 Frame frame = new Frame();
                 Label label = new Label();
+
                 label.Text = newPage1.pageText;
                 label.LineBreakMode = LineBreakMode.TailTruncation;
+                Label dateLabel = new Label();
+                dateLabel.Text = newPage1.lastEdit;
+                dateLabel.VerticalOptions = LayoutOptions.EndAndExpand;
+                dateLabel.FontSize = 12;
+                StackLayout stack = new StackLayout();
+                stack.Children.Add(label);
+                stack.Children.Add(dateLabel);
+         
                 frame.HeightRequest = 75;
                 frame.BorderColor = Color.Gray;
                 var c = new TapGestureRecognizer();
                 c.Tapped += (tapSender, tapEventArg) =>
                 {
-                    Page1 anotherPage1 = new Page1(label.Text);
+                    Page1 anotherPage1 = new Page1(label.Text, dateLabel.Text);
                     anotherPage1.Disappearing += (object anotherA, EventArgs anotherB) =>
                     {
                         label.Text = anotherPage1.pageText;
+                        dateLabel.Text = anotherPage1.lastEdit;
                     };
                     Navigation.PushAsync(anotherPage1);
                 };
-                frame.Content = label;
+                frame.Content = stack;
                 frame.GestureRecognizers.Add(c);
 
                 var pan = new PanGestureRecognizer();
@@ -302,7 +324,9 @@ namespace NoteApp1
                     Left.Children.Add(frame);
                 }
                 string newFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), newName);
-                File.WriteAllText(newFile, ((Label)frame.Content).Text);
+                File.WriteAllText(newFile, ((Label)((StackLayout)frame.Content).Children.First()).Text 
+                    + Convert.ToChar(1)
+                    + ((Label)((StackLayout)frame.Content).Children.Last()).Text);
             };
            
             Navigation.PushAsync(newPage1);

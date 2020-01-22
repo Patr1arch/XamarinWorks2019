@@ -3,14 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NoteApp1.Page1"
              Title="Nake new note">
-    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+" Clicked="SaveChanges"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <Grid>
+        <Grid Margin="5, 5, 5, 5">
+            <StackLayout
+                Orientation="Horizontal">
+                <Label x:Name="lastEditLabel"
+                       FontSize="Medium"/>
+                <Label x:Name="symCount"
+                       FontSize="Medium"/>
+            </StackLayout>
             <!--<Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />-->
-            <Editor x:Name="Editor" Placeholder="Input a text:" ></Editor>
-            <Button Clicked="Button_Clicked" HorizontalOptions="End" VerticalOptions="End" WidthRequest="40" HeightRequest="40"></Button>
+            <Editor Margin="10, 10, 10, 10"
+                TextChanged="Editor_TextChanged" x:Name="Editor" Placeholder="Input a text:" ></Editor>
+            <!--<Button Clicked="Button_Clicked" HorizontalOptions="End" VerticalOptions="End" WidthRequest="40" HeightRequest="40"></Button>-->
         </Grid>
     </ContentPage.Content>
 </ContentPage>
