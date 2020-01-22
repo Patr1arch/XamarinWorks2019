@@ -172,7 +172,7 @@ namespace NoteApp1
         {
             var newPage1 = new Page1();
             newPage1.Disappearing += (object a, EventArgs b) => {
-                if (newPage1.isCancelled) return;
+                if (newPage1.isCancelled || String.IsNullOrEmpty(newPage1.pageText)) return;
                 Frame frame = new Frame();
                 Label label = new Label();
                 label.Text = newPage1.pageText;
